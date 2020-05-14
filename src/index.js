@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // su dung https://ant.design/
 import 'antd/dist/antd.css';
 
-import App from './pages/Todo';
+import App from './pages/Movie';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

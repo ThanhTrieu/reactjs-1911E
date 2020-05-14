@@ -1,36 +1,33 @@
 import React from 'react';
-import { List, Checkbox } from 'antd';
+import { List, Checkbox, Typography } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-];
+const { Text } = Typography;
 
-const ListTodo = () => {
+const ListTodo = (props) => {
   return (
     <>
       <List
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={props.data}
         renderItem={item => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Checkbox/>}
-              title={<a href="https://ant.design">{item.title}</a>}
+              avatar={<Checkbox
+                checked={item.done}
+                onClick={() =>props.done(item.id)}
+              />}
+              title={<Text
+                delete={item.done}
+                onClick={() => props.done(item.id)}
+              >
+                {item.name}
+              </Text>}
             />
             <div>
-              <DeleteOutlined />
+              <DeleteOutlined
+                onClick={() => props.delete(item.id)}
+              />
             </div>
           </List.Item>
         )}

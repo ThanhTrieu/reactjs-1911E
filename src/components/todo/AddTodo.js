@@ -3,14 +3,16 @@ import { Input } from 'antd';
 
 const { Search } = Input;
 
-const AddTodo = () => {
+const AddTodo = (props) => {
   return (
     <>
       <Search
         placeholder="input add text"
         enterButton="Add"
         size="large"
-        onSearch={value => console.log(value)}
+        value={props.value}
+        onSearch={value => props.add(value)}
+        onChange={props.change}
       />
     </>
   )
