@@ -1,30 +1,38 @@
 import React, {useState, useEffect} from 'react';
 
 const CountTimer = () => {
-  const [time, setTime] = useState(1);
-  const [show, setShow] = useState(true);
-
+  const [timeString, setTimeString] = useState(null);
   useEffect(() => {
     let count = setInterval(() => {
-      setTime(time+1)
+      const now = new Date();
+      const hours = `0${now.getHours()}`.slice(-2);
+      const minutes = `0${now.getMinutes()}`.slice(-2);
+      const seconds = `0${now.getSeconds()}`.slice(-2);
+      const newTimeString = `${hours} : ${minutes} : ${seconds}`;
+      setTimeString(newTimeString);
     }, 1000);
 
     return () => {
-      // clean up
-      console.log('AAA');
+      // clean up hooks
       clearInterval(count);
     }
-  },[time])
-
-  const removeTime = () => {
-    setShow(false);
-  }
+  } , []);
 
   return(
     <>
-      {show ? (<h1>{time}</h1>) : null }
-      <button onClick={()=>removeTime()}>Xoa time</button>
+      <h1>{timeString}</h1>
     </>
   )
 }
-export default CountTimer;
+
+const ShowTime = () => {
+  const [display, setDisplay] = useState(true);
+  return(
+    <>
+      {display && <CountTimer/>}
+      <button onClick={() => setDisplay(!display)}>Toggle CountTimer</button>
+    </>
+  )
+}
+
+export default ShowTime;

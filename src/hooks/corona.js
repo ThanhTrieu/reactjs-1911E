@@ -26,7 +26,6 @@ export default class VirusCorona extends Component {
 
 
   render() {
-    console.log(this.state.dataVirus)
     return(
       <>
         <PageLayout>
