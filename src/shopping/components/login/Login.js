@@ -1,5 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, Input, Button, Checkbox } from 'antd';
+import { useHistory, Redirect } from "react-router-dom";
+import {api} from '../../api/api';
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,8 +13,19 @@ const tailLayout = {
 
 
 const LoginForm = () => {
+  const history = useHistory();
+
   const onFinish = values => {
-    console.log('Success:', values);
+    //console.log('Success:', values);
+    const chkLogin = api.checkLoginUser(values.username, values.password);
+    
+    if(chkLogin){
+      // cho vao trang home page
+      window.location.href = '/home';
+    } else {
+      // van o lai trang login
+      history.push('/login?state=fail');
+    }
   };
 
   const onFinishFailed = errorInfo => {

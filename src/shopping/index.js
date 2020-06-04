@@ -3,8 +3,12 @@ import { Skeleton } from 'antd';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+import {helper} from './helper/userLogin';
+
+const isLogined = helper.getInfoUserLogin();
 
 const HomePage = lazy(() => import('./components/home/Home'));
 const DetailPage = lazy(() => import('./components/product/Detail'));
@@ -19,17 +23,19 @@ const Shopping = () => {
         >
           <Switch>
             <Route exact path="/">
-              <HomePage/>
+              {isLogined ? <HomePage/> : <Redirect to="/login" />}
             </Route>
             <Route path="/home">
               <HomePage/>
+              {isLogined ? <HomePage/> : <Redirect to="/login" />}
             </Route>
             <Route path="/product/:id">
-              <DetailPage/>
+              {isLogined ? <DetailPage/> : <Redirect to="/login" />}
             </Route>
             <Route path="/login">
               <LoginPage/>
             </Route>
+
           </Switch>
         </Suspense>
       </Router>

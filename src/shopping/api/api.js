@@ -34,12 +34,19 @@ const checkLoginUser = (user, pass) => {
   let token = null;
   if(user === 'admin' && pass === '123'){
     // ma hoa thong tin user va luu vao localStorage tren browser
-    token = jwt.sign({data: user}, KEY_JWT, { algorithm: 'RS256'});
+    // token song trong vong 1h
+    token = jwt.sign(
+      { exp: Math.floor(Date.now() / 1000) + (60 * 60),
+      data: user }, 
+      KEY_JWT
+    );
+    localStorage.setItem('token', token);
   }
   return token;
 }
 
 export const api = {
   product: data,
-  getDataById
+  getDataById,
+  checkLoginUser
 }
