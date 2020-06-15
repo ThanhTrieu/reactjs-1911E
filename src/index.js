@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // su dung https://ant.design/
 import 'antd/dist/antd.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './redux/index';
+import App from './movie/Movie';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
