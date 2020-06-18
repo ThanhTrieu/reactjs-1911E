@@ -11,7 +11,7 @@ const getDataMovieFromApi = async () => {
       'Content-Type': 'application/json'
     }
   });
-  const result = await response.status === 200 ? response.data : [];
+  const result = await response.status === 200 ? response.data.results : [];
   return result;
 }
 
