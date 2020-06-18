@@ -11,6 +11,7 @@ import configStore from './store';
 const { store } = configStore();
 
 const PopularMovie = lazy(() => import('./page/popular/index'));
+const SearchMovie = lazy(() => import('./page/seacrh/index'));
 
 const AppMovie = () => {
   return (
@@ -23,6 +24,12 @@ const AppMovie = () => {
             <Switch>
               <Route exact path="/">
                 <PopularMovie/>
+              </Route>
+              <Route path="/popular-movie">
+                <PopularMovie/>
+              </Route>
+              <Route path="/search-movie">
+                <SearchMovie/>
               </Route>
             </Switch>
           </Suspense>

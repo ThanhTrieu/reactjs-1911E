@@ -15,6 +15,22 @@ const getDataMovieFromApi = async () => {
   return result;
 }
 
+const searchNameMovieFromApi = async (lang,name) => {
+  const proxy = `https://cors-anywhere.herokuapp.com/`;
+  const api = `https://www.themoviedb.org/search/multi?language=${lang}&query=${name}`;
+  const response = await axios.get(proxy+api,{
+    headers: {
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Credentials': true,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Content-Type': 'application/json'
+    }
+  });
+  const result = await response.status === 200 ? response.data.results : [];
+  return result;
+}
+
 export const api = {
-  getDataMovieFromApi
+  getDataMovieFromApi,
+  searchNameMovieFromApi
 }
