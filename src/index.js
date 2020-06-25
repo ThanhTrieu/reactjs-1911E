@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './movie/Movie';
+import App from './cart/Cart';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

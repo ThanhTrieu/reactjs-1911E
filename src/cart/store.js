@@ -8,6 +8,7 @@ import rootSaga from './saga';
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
+// preloadedState : state mac dinh luu vao store
 const configStore = (preloadedState = {}) => {
   const store = createStore(
     rootReducer,

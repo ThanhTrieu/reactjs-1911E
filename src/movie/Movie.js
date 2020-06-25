@@ -4,11 +4,13 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { PersistGate } from 'redux-persist/integration/react';
 import {Spinner} from 'react-bootstrap';
+import { Spin } from 'antd';
 import {Provider} from 'react-redux';
 import configStore from './store';
 
-const { store } = configStore();
+const { persistor, store } = configStore();
 
 const PopularMovie = lazy(() => import('./page/popular/index'));
 const SearchMovie = lazy(() => import('./page/seacrh/index'));
@@ -18,21 +20,26 @@ const AppMovie = () => {
     <>
       <Router>
         <Provider store={store}>
-          <Suspense
-            fallback={<Spinner animation="border" />}
+          <PersistGate
+            loading={<Spin size="large" />}
+            persistor={persistor}
           >
-            <Switch>
-              <Route exact path="/">
-                <PopularMovie/>
-              </Route>
-              <Route path="/popular-movie">
-                <PopularMovie/>
-              </Route>
-              <Route path="/search-movie">
-                <SearchMovie/>
-              </Route>
-            </Switch>
-          </Suspense>
+            <Suspense
+              fallback={<Spinner animation="border" />}
+            >
+              <Switch>
+                <Route exact path="/">
+                  <PopularMovie/>
+                </Route>
+                <Route path="/popular-movie">
+                  <PopularMovie/>
+                </Route>
+                <Route path="/search-movie">
+                  <SearchMovie/>
+                </Route>
+              </Switch>
+            </Suspense>
+          </PersistGate>
         </Provider>
       </Router>
     </>
