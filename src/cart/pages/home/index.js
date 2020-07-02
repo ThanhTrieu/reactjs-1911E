@@ -31,7 +31,9 @@ const HomePage = () => {
           </Breadcrumb>
           <div className="site-layout-content">
           { loading ? (<Skeleton active />) : (
-            <ListItem products={dataProduct} />) 
+            <ListItem 
+              products={dataProduct}
+            />) 
           }
           </div>
         </Content>
