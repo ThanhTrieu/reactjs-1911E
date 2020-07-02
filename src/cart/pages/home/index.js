@@ -4,6 +4,7 @@ import { Layout, Breadcrumb } from 'antd';
 import LayoutPage from '../../components/LayoutPage';
 import ListItem from '../../components/home/LitsItem';
 import { getDataProduct } from './action';
+import { Skeleton } from 'antd';
 
 import '../css/comon.css';
 
@@ -29,7 +30,9 @@ const HomePage = () => {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-content">
-            <ListItem/>
+          { loading ? (<Skeleton active />) : (
+            <ListItem products={dataProduct} />) 
+          }
           </div>
         </Content>
       </LayoutPage>
