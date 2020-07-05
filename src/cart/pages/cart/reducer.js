@@ -1,7 +1,9 @@
 import {
   START_ADD_CART,
   ADD_CART_SUCCESS,
-  ADD_CART_FAIL
+  ADD_CART_FAIL,
+  REMOVE_ITEM_CART,
+  CHANGE_QUANLITY_CART
 } from './action';
 
 const initialState = {
@@ -58,6 +60,27 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         startAddCart: false,
         error: action.error
+      }
+    case REMOVE_ITEM_CART:
+      const id = action.idItem;
+      const itemRemove = state.itemAdded.filter( data => data.id === id)[0];
+      const newItemCart = state.itemAdded.filter(data => data.id !== itemRemove.id);
+      return {
+          ...state,
+          itemAdded: newItemCart,
+          totalPrice: state.totalPrice - (itemRemove.price*itemRemove.qty)
+      }
+    case CHANGE_QUANLITY_CART:
+      const idChange = action.id;
+      const qtyChange = action.qty;
+      const itemChange = state.itemAdded.filter( data => data.id === idChange)[0];
+      // cap nhat lai qty va totalPrice
+      itemChange.qty = qtyChange;
+      // duyet lai state.itemAdded cong dong tien (price*qty)
+      const newTotalPrice = state.itemAdded.map(item => item.price*item.qty).reduce((prev, next) => prev + next);
+      return {
+        ...state,
+        totalPrice: newTotalPrice
       }
     default:
       return state;

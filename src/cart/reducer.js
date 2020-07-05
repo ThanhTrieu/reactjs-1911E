@@ -3,21 +3,15 @@ import { homeReducer } from './pages/home/reducer';
 import cartReducer from './pages/cart/reducer';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-const persistRootConfig = {
-  key: 'CartRoot',
-  storage: storage,
-  blacklist:['loading', 'error']
-}
+import { connectRouter } from 'connected-react-router';
 const persistCartConfig = {
   key: 'CartItems',
   storage: storage,
-  whiteList: ['itemAdded', 'totalPrice']
+  whiteList: ['cartReducer']
 }
-
-const rootReducer = combineReducers({
+const rootReducer = (history) => combineReducers({
+  router: connectRouter(history),
   homeReducer,
   cartReducer: persistReducer(persistCartConfig, cartReducer)
 });
-
-export default persistReducer(persistRootConfig, rootReducer);
+export default rootReducer;

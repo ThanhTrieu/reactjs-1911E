@@ -1,12 +1,16 @@
 export const REMOVE_ITEM_CART = 'REMOVE_ITEM_CART';
-export const REMOVE_ITEM_CART_SUCCESS = 'REMOVE_ITEM_CART_SUCCESS';
-export const REMOVE_ITEM_CART_FAIL = 'REMOVE_ITEM_CART_FAIL';
-export const PENDING_REMOVE_ITEM_CART = 'PENDING_REMOVE_ITEM_CART';
+export const CHANGE_QUANLITY_CART = 'CHANGE_QUANLITY_CART';
 
 export const START_ADD_CART = 'START_ADD_CART';
 export const ADD_CART = 'ADD_CART';
 export const ADD_CART_SUCCESS = 'ADD_CART_SUCCESS';
 export const ADD_CART_FAIL = 'ADD_CART_FAIL';
+
+export const changeQuanlityItemCart = (id, qty) => ({
+  type: CHANGE_QUANLITY_CART,
+  id,
+  qty
+})
 
 export const addProductToCart = (id) => ({
   type: ADD_CART,
@@ -27,20 +31,5 @@ export const startAddCart = (start) => ({
 export const removeItemInCart = (idItem) => ({
   type: REMOVE_ITEM_CART,
   idItem
-});
-
-export const pendingRemoveItemCart = (loading) => ({
-  type: PENDING_REMOVE_ITEM_CART,
-  loading
-});
-
-export const removeItemInCartSuccess = (addedItems) => ({
-  type: REMOVE_ITEM_CART_SUCCESS,
-  addedItems
-});
-
-export const removeItemInCartFail = (error) => ({
-  type: REMOVE_ITEM_CART_FAIL,
-  error
 });
 

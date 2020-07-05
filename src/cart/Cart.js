@@ -1,6 +1,5 @@
 import React, {lazy, Suspense} from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -8,10 +7,12 @@ import {Spinner} from 'react-bootstrap';
 import configStore from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ConnectedRouter } from 'connected-react-router'
 
-const { persistor, store } = configStore();
+const { persistor, store, history } = configStore();
 
 const HomePage = lazy(() => import('./pages/home/index'));
+const CartPage = lazy(() => import('./pages/cart/index'));
 
 const AppCart = () => {
   return (
@@ -21,7 +22,7 @@ const AppCart = () => {
           loading={<Spinner animation="border" />}
           persistor={persistor}
         >
-          <Router>
+          <ConnectedRouter history={history}>
             <Suspense
               fallback={<Spinner animation="border" />}
             >
@@ -29,9 +30,12 @@ const AppCart = () => {
                 <Route exact path="/">
                   <HomePage/>
                 </Route>
+                <Route path="/cart">
+                  <CartPage/>
+                </Route>
               </Switch>
             </Suspense>
-          </Router>
+          </ConnectedRouter>
         </PersistGate>
       </Provider>
     </>
